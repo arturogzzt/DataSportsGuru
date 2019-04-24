@@ -14,6 +14,7 @@
 		41FCD4272270CB72005AAE88 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41FCD4252270CB72005AAE88 /* LaunchScreen.storyboard */; };
 		41FCD42F2270CCD2005AAE88 /* IndexGamesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41FCD42E2270CCD2005AAE88 /* IndexGamesViewController.swift */; };
 		41FCD4312270CFED005AAE88 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41FCD4302270CFED005AAE88 /* Game.swift */; };
+		41FCD4332270D859005AAE88 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41FCD4322270D859005AAE88 /* CustomTableViewCell.swift */; };
 		B147FC8E4A34C5480E3B6B0C /* Pods_DataSportsGuru.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59AA78CA86F4311AE7D1FE9E /* Pods_DataSportsGuru.framework */; };
 /* End PBXBuildFile section */
 
@@ -27,6 +28,7 @@
 		41FCD4282270CB72005AAE88 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		41FCD42E2270CCD2005AAE88 /* IndexGamesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndexGamesViewController.swift; sourceTree = "<group>"; };
 		41FCD4302270CFED005AAE88 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
+		41FCD4322270D859005AAE88 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 		59AA78CA86F4311AE7D1FE9E /* Pods_DataSportsGuru.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DataSportsGuru.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		90EE3478FD9E78570D35D891 /* Pods-DataSportsGuru.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DataSportsGuru.release.xcconfig"; path = "Target Support Files/Pods-DataSportsGuru/Pods-DataSportsGuru.release.xcconfig"; sourceTree = "<group>"; };
 		A398023D50708A1A94ABA26C /* Pods-DataSportsGuru.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DataSportsGuru.debug.xcconfig"; path = "Target Support Files/Pods-DataSportsGuru/Pods-DataSportsGuru.debug.xcconfig"; sourceTree = "<group>"; };
@@ -78,6 +80,7 @@
 				41FCD42E2270CCD2005AAE88 /* IndexGamesViewController.swift */,
 				41FCD4302270CFED005AAE88 /* Game.swift */,
 				41FCD4202270CB71005AAE88 /* Main.storyboard */,
+				41FCD4322270D859005AAE88 /* CustomTableViewCell.swift */,
 				41FCD4232270CB72005AAE88 /* Assets.xcassets */,
 				41FCD4252270CB72005AAE88 /* LaunchScreen.storyboard */,
 				41FCD4282270CB72005AAE88 /* Info.plist */,
@@ -217,6 +220,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				41FCD42F2270CCD2005AAE88 /* IndexGamesViewController.swift in Sources */,
+				41FCD4332270D859005AAE88 /* CustomTableViewCell.swift in Sources */,
 				41FCD41F2270CB71005AAE88 /* ViewController.swift in Sources */,
 				41FCD41D2270CB71005AAE88 /* AppDelegate.swift in Sources */,
 				41FCD4312270CFED005AAE88 /* Game.swift in Sources */,
