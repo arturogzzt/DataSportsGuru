@@ -12,9 +12,14 @@
 		41FCD4222270CB71005AAE88 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41FCD4202270CB71005AAE88 /* Main.storyboard */; };
 		41FCD4242270CB72005AAE88 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 41FCD4232270CB72005AAE88 /* Assets.xcassets */; };
 		41FCD4272270CB72005AAE88 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41FCD4252270CB72005AAE88 /* LaunchScreen.storyboard */; };
-		41FCD42F2270CCD2005AAE88 /* IndexGamesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41FCD42E2270CCD2005AAE88 /* IndexGamesViewController.swift */; };
 		41FCD4312270CFED005AAE88 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41FCD4302270CFED005AAE88 /* Game.swift */; };
 		41FCD4332270D859005AAE88 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41FCD4322270D859005AAE88 /* CustomTableViewCell.swift */; };
+		448C94C722832B6A00039BBF /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448C94C622832B6A00039BBF /* LoginViewController.swift */; };
+		4494CD34227F64F9000C308B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4494CD33227F64F9000C308B /* GoogleService-Info.plist */; };
+		4494CD38227FAAD0000C308B /* GameRecapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4494CD37227FAAD0000C308B /* GameRecapViewController.swift */; };
+		4494CD3A22824125000C308B /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4494CD3922824125000C308B /* SignInViewController.swift */; };
+		44A3A52C2272882D00C88679 /* IndexGamesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A3A52B2272882D00C88679 /* IndexGamesTableViewController.swift */; };
+		44A3A52E227B4F4A00C88679 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A3A52D227B4F4A00C88679 /* GameViewController.swift */; };
 		B147FC8E4A34C5480E3B6B0C /* Pods_DataSportsGuru.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59AA78CA86F4311AE7D1FE9E /* Pods_DataSportsGuru.framework */; };
 /* End PBXBuildFile section */
 
@@ -26,9 +31,14 @@
 		41FCD4232270CB72005AAE88 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		41FCD4262270CB72005AAE88 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		41FCD4282270CB72005AAE88 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		41FCD42E2270CCD2005AAE88 /* IndexGamesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndexGamesViewController.swift; sourceTree = "<group>"; };
 		41FCD4302270CFED005AAE88 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		41FCD4322270D859005AAE88 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
+		448C94C622832B6A00039BBF /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		4494CD33227F64F9000C308B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		4494CD37227FAAD0000C308B /* GameRecapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameRecapViewController.swift; sourceTree = "<group>"; };
+		4494CD3922824125000C308B /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		44A3A52B2272882D00C88679 /* IndexGamesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexGamesTableViewController.swift; sourceTree = "<group>"; };
+		44A3A52D227B4F4A00C88679 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		59AA78CA86F4311AE7D1FE9E /* Pods_DataSportsGuru.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DataSportsGuru.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		90EE3478FD9E78570D35D891 /* Pods-DataSportsGuru.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DataSportsGuru.release.xcconfig"; path = "Target Support Files/Pods-DataSportsGuru/Pods-DataSportsGuru.release.xcconfig"; sourceTree = "<group>"; };
 		A398023D50708A1A94ABA26C /* Pods-DataSportsGuru.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DataSportsGuru.debug.xcconfig"; path = "Target Support Files/Pods-DataSportsGuru/Pods-DataSportsGuru.debug.xcconfig"; sourceTree = "<group>"; };
@@ -75,15 +85,20 @@
 		41FCD41B2270CB71005AAE88 /* DataSportsGuru */ = {
 			isa = PBXGroup;
 			children = (
+				44A3A52D227B4F4A00C88679 /* GameViewController.swift */,
 				41FCD41C2270CB71005AAE88 /* AppDelegate.swift */,
+				448C94C622832B6A00039BBF /* LoginViewController.swift */,
 				41FCD41E2270CB71005AAE88 /* ViewController.swift */,
-				41FCD42E2270CCD2005AAE88 /* IndexGamesViewController.swift */,
 				41FCD4302270CFED005AAE88 /* Game.swift */,
 				41FCD4202270CB71005AAE88 /* Main.storyboard */,
+				4494CD3922824125000C308B /* SignInViewController.swift */,
+				4494CD37227FAAD0000C308B /* GameRecapViewController.swift */,
+				44A3A52B2272882D00C88679 /* IndexGamesTableViewController.swift */,
 				41FCD4322270D859005AAE88 /* CustomTableViewCell.swift */,
 				41FCD4232270CB72005AAE88 /* Assets.xcassets */,
 				41FCD4252270CB72005AAE88 /* LaunchScreen.storyboard */,
 				41FCD4282270CB72005AAE88 /* Info.plist */,
+				4494CD33227F64F9000C308B /* GoogleService-Info.plist */,
 			);
 			path = DataSportsGuru;
 			sourceTree = "<group>";
@@ -158,6 +173,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				41FCD4272270CB72005AAE88 /* LaunchScreen.storyboard in Resources */,
+				4494CD34227F64F9000C308B /* GoogleService-Info.plist in Resources */,
 				41FCD4242270CB72005AAE88 /* Assets.xcassets in Resources */,
 				41FCD4222270CB71005AAE88 /* Main.storyboard in Resources */,
 			);
@@ -198,14 +214,26 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-DataSportsGuru/Pods-DataSportsGuru-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/SkyFloatingLabelTextField/SkyFloatingLabelTextField.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyButton/SwiftyButton.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SkyFloatingLabelTextField.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyButton.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -219,10 +247,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				41FCD42F2270CCD2005AAE88 /* IndexGamesViewController.swift in Sources */,
+				448C94C722832B6A00039BBF /* LoginViewController.swift in Sources */,
 				41FCD4332270D859005AAE88 /* CustomTableViewCell.swift in Sources */,
+				44A3A52C2272882D00C88679 /* IndexGamesTableViewController.swift in Sources */,
 				41FCD41F2270CB71005AAE88 /* ViewController.swift in Sources */,
+				4494CD38227FAAD0000C308B /* GameRecapViewController.swift in Sources */,
+				4494CD3A22824125000C308B /* SignInViewController.swift in Sources */,
 				41FCD41D2270CB71005AAE88 /* AppDelegate.swift in Sources */,
+				44A3A52E227B4F4A00C88679 /* GameViewController.swift in Sources */,
 				41FCD4312270CFED005AAE88 /* Game.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

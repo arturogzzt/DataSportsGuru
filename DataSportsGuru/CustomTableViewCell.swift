@@ -10,11 +10,11 @@ import UIKit
 
 class CustomTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var vScoreLabel: UITextField!
-    @IBOutlet weak var vTeamLabel: UITextField!
-    @IBOutlet weak var hScoreLabel: UITextField!
-    @IBOutlet weak var hTeamLabel: UITextField!
-
+    @IBOutlet weak var vScoreLabel: UILabel!
+    @IBOutlet weak var vTeamLabel: UILabel!
+    @IBOutlet weak var hScoreLabel: UILabel!
+    @IBOutlet weak var hTeamLabel: UILabel!
+    @IBOutlet weak var gameStatus: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
