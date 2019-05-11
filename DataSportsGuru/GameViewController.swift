@@ -17,6 +17,10 @@ class GameViewController: UIViewController {
     var playoffData : JSON!
     var vTeamElo = 0.0;
     var HTeamElo = 0.0;
+    
+    var hTeamStats : TeamStats!
+    var vTeamStats : TeamStats!
+    
     @IBOutlet weak var vScore: UILabel!
     @IBOutlet weak var hScore: UILabel!
     @IBOutlet weak var vTeamTri: UILabel!
@@ -48,7 +52,6 @@ class GameViewController: UIViewController {
             hTeamSeriesLoss.text = game.vTeamWin
             gameInfo.text = "Quarter: " + game.period
             gameRecapBtn.isHidden = true
-           
         }
         else if(game.status == "1"){
             updateChartData()
@@ -75,7 +78,8 @@ class GameViewController: UIViewController {
             hTeamSeriesWin.text = game.hTeamWin
             hTeamSeriesLoss.text = game.vTeamWin
             gameInfo.text = "FINAL"
-            getGameRecap(url: "http://data.nba.net/10s/prod/v1/" + todaysDate + "/" + game.gameID + "_recap_article.json")
+//            getGameRecap(url: "http://data.nba.net/10s/prod/v1/" + todaysDate + "/" + game.gameID + "_recap_article.json")
+            getGameRecap(url: "http://data.nba.net/10s/prod/v1/" + "20190510" + "/" + game.gameID + "_recap_article.json")
             
         }
     }
@@ -150,21 +154,83 @@ class GameViewController: UIViewController {
     }
     
     func assignPlayoffData(){
+        var fgpLocal : Float = 0
+        var trpgLocal : Float = 0
+        var ftpLocal : Float = 0
+        var stealsLocal : Float = 0
+        var blocksLocal : Float = 0
+        var fgpVisit : Float = 0
+        var trpgVisit : Float = 0
+        var ftpVisit : Float = 0
+        var stealsVisit : Float = 0
+        var blocksVisit : Float = 0
+        
+        var localGames : Int = 0
+        var visitGames : Int = 0
         
         for i in 0...playoffData.count{
-        if(playoffData[i]["teams"][0]["teamId"].stringValue == game.vTeamID){
-               print(i)
+            if(playoffData[i]["teams"][0]["teamId"].stringValue == game.vTeamID){
+                let data = playoffData[i]["teams"][0]
+                
+                fgpVisit += Float(data["fgp"]["avg"].stringValue)!
+                trpgVisit += Float(data["trpg"]["avg"].stringValue)!
+                ftpVisit += Float(data["ftp"]["avg"].stringValue)!
+                stealsVisit += Float(data["spg"]["avg"].stringValue)!
+                blocksVisit += Float(data["bpg"]["avg"].stringValue)!
+                
+                visitGames += 1
+                
             }
-        if(playoffData[i]["teams"][1]["teamId"].stringValue == game.vTeamID){
-               print(i)
+            if(playoffData[i]["teams"][1]["teamId"].stringValue == game.vTeamID){
+                let data = playoffData[i]["teams"][0]
+                
+                fgpVisit += Float(data["fgp"]["avg"].stringValue)!
+                trpgVisit += Float(data["trpg"]["avg"].stringValue)!
+                ftpVisit += Float(data["ftp"]["avg"].stringValue)!
+                stealsVisit += Float(data["spg"]["avg"].stringValue)!
+                blocksVisit += Float(data["bpg"]["avg"].stringValue)!
+                
+                visitGames += 1
             }
-        if(playoffData[i]["teams"][0]["teamId"].stringValue == game.hTeamID){
-                print(i)
+            if(playoffData[i]["teams"][0]["teamId"].stringValue == game.hTeamID){
+                let data = playoffData[i]["teams"][0]
+                
+                fgpLocal += Float(data["fgp"]["avg"].stringValue)!
+                trpgLocal += Float(data["trpg"]["avg"].stringValue)!
+                ftpLocal += Float(data["ftp"]["avg"].stringValue)!
+                stealsLocal += Float(data["spg"]["avg"].stringValue)!
+                blocksLocal += Float(data["bpg"]["avg"].stringValue)!
+                
+                localGames += 1
             }
-        if(playoffData[i]["teams"][1]["teamId"].stringValue == game.hTeamID){
-                print(i)
+            if(playoffData[i]["teams"][1]["teamId"].stringValue == game.hTeamID){
+                let data = playoffData[i]["teams"][0]
+                
+                fgpLocal += Float(data["fgp"]["avg"].stringValue)!
+                trpgLocal += Float(data["trpg"]["avg"].stringValue)!
+                ftpLocal += Float(data["ftp"]["avg"].stringValue)!
+                stealsLocal += Float(data["spg"]["avg"].stringValue)!
+                blocksLocal += Float(data["bpg"]["avg"].stringValue)!
+                
+                localGames += 1
             }
         }
+        fgpLocal /= Float(localGames)
+        trpgLocal /= Float(localGames)
+        ftpLocal /= Float(localGames)
+        stealsLocal /= Float(localGames)
+        blocksLocal /= Float(localGames)
+        fgpVisit /= Float(visitGames)
+        trpgVisit /= Float(visitGames)
+        ftpVisit /= Float(visitGames)
+        stealsVisit /= Float(visitGames)
+        blocksVisit /= Float(visitGames)
+        
+        hTeamStats = TeamStats.init(fgp: fgpLocal, rebounds: trpgLocal, freethrows: ftpLocal, steals: stealsLocal, blocks: blocksLocal)
+        vTeamStats = TeamStats.init(fgp: fgpVisit, rebounds: trpgVisit, freethrows: ftpVisit, steals: stealsVisit, blocks: blocksVisit)
+        
+        hTeamStats.getElo()
+        vTeamStats.getElo()
     }
     // MARK: - Navigation
 

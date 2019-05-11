@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		413F6A9A228735A90079B0C3 /* TeamStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 413F6A99228735A90079B0C3 /* TeamStats.swift */; };
 		41FCD41D2270CB71005AAE88 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41FCD41C2270CB71005AAE88 /* AppDelegate.swift */; };
 		41FCD41F2270CB71005AAE88 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41FCD41E2270CB71005AAE88 /* ViewController.swift */; };
 		41FCD4222270CB71005AAE88 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41FCD4202270CB71005AAE88 /* Main.storyboard */; };
@@ -24,6 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		413F6A99228735A90079B0C3 /* TeamStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamStats.swift; sourceTree = "<group>"; };
 		41FCD4192270CB71005AAE88 /* DataSportsGuru.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DataSportsGuru.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		41FCD41C2270CB71005AAE88 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		41FCD41E2270CB71005AAE88 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -90,6 +92,7 @@
 				448C94C622832B6A00039BBF /* LoginViewController.swift */,
 				41FCD41E2270CB71005AAE88 /* ViewController.swift */,
 				41FCD4302270CFED005AAE88 /* Game.swift */,
+				413F6A99228735A90079B0C3 /* TeamStats.swift */,
 				41FCD4202270CB71005AAE88 /* Main.storyboard */,
 				4494CD3922824125000C308B /* SignInViewController.swift */,
 				4494CD37227FAAD0000C308B /* GameRecapViewController.swift */,
@@ -253,6 +256,7 @@
 				41FCD41F2270CB71005AAE88 /* ViewController.swift in Sources */,
 				4494CD38227FAAD0000C308B /* GameRecapViewController.swift in Sources */,
 				4494CD3A22824125000C308B /* SignInViewController.swift in Sources */,
+				413F6A9A228735A90079B0C3 /* TeamStats.swift in Sources */,
 				41FCD41D2270CB71005AAE88 /* AppDelegate.swift in Sources */,
 				44A3A52E227B4F4A00C88679 /* GameViewController.swift in Sources */,
 				41FCD4312270CFED005AAE88 /* Game.swift in Sources */,

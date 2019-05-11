@@ -23,7 +23,9 @@ class ViewController: UIViewController {
         format.dateFormat = "yyyyMMdd"
         todaysDate = format.string(from: date)
         // Do any additional setup after loading the view.
-        getTodayGameData(url: "http://data.nba.net/10s/prod/v1/" + todaysDate + "/scoreboard.json")
+//        getTodayGameData(url: "http://data.nba.net/10s/prod/v1/" + todaysDate + "/scoreboard.json")
+        getTodayGameData(url: "http://data.nba.net/10s/prod/v1/" + "20190510" + "/scoreboard.json")
+
     }
 
     
@@ -53,9 +55,11 @@ class ViewController: UIViewController {
         let numberOfGames = json["numGames"].int!
         numberGames = numberOfGames
         
-        for i in 0...numberOfGames-1 {
-            var currentGame = json["games"][i]
-            games.append(Game.init(gameID: currentGame["gameId"].stringValue, arenaGame: currentGame["arena"]["name"].stringValue, startTime: currentGame["startTimeEastern"].stringValue, vTeamID: currentGame["vTeam"]["teamId"].stringValue, vTeamTriCode: currentGame["vTeam"]["triCode"].stringValue, hTeamID: currentGame["hTeam"]["teamId"].stringValue, hTeamTriCode: currentGame["hTeam"]["triCode"].stringValue, vScore: currentGame["vTeam"]["score"].stringValue, hScore: currentGame["hTeam"]["score"].stringValue, status: currentGame["statusNum"].stringValue, hTeamWin: currentGame["playoffs"]["hTeam"]["seriesWin"].stringValue, vTeamWin: currentGame["playoffs"]["vTeam"]["seriesWin"].stringValue, period: currentGame["period"]["current"].stringValue))
+        if numberGames >= 1 {
+            for i in 0...numberOfGames-1 {
+                var currentGame = json["games"][i]
+                games.append(Game.init(gameID: currentGame["gameId"].stringValue, arenaGame: currentGame["arena"]["name"].stringValue, startTime: currentGame["startTimeEastern"].stringValue, vTeamID: currentGame["vTeam"]["teamId"].stringValue, vTeamTriCode: currentGame["vTeam"]["triCode"].stringValue, hTeamID: currentGame["hTeam"]["teamId"].stringValue, hTeamTriCode: currentGame["hTeam"]["triCode"].stringValue, vScore: currentGame["vTeam"]["score"].stringValue, hScore: currentGame["hTeam"]["score"].stringValue, status: currentGame["statusNum"].stringValue, hTeamWin: currentGame["playoffs"]["hTeam"]["seriesWin"].stringValue, vTeamWin: currentGame["playoffs"]["vTeam"]["seriesWin"].stringValue, period: currentGame["period"]["current"].stringValue))
+            }
         }
         
     }
