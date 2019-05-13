@@ -87,7 +87,6 @@
 		41FCD41B2270CB71005AAE88 /* DataSportsGuru */ = {
 			isa = PBXGroup;
 			children = (
-				44A3A52D227B4F4A00C88679 /* GameViewController.swift */,
 				41FCD41C2270CB71005AAE88 /* AppDelegate.swift */,
 				448C94C622832B6A00039BBF /* LoginViewController.swift */,
 				41FCD41E2270CB71005AAE88 /* ViewController.swift */,
@@ -97,6 +96,7 @@
 				4494CD3922824125000C308B /* SignInViewController.swift */,
 				4494CD37227FAAD0000C308B /* GameRecapViewController.swift */,
 				44A3A52B2272882D00C88679 /* IndexGamesTableViewController.swift */,
+				44A3A52D227B4F4A00C88679 /* GameViewController.swift */,
 				41FCD4322270D859005AAE88 /* CustomTableViewCell.swift */,
 				41FCD4232270CB72005AAE88 /* Assets.xcassets */,
 				41FCD4252270CB72005AAE88 /* LaunchScreen.storyboard */,
