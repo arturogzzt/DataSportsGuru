@@ -15,6 +15,9 @@ class CustomTableViewCell: UITableViewCell {
     @IBOutlet weak var hScoreLabel: UILabel!
     @IBOutlet weak var hTeamLabel: UILabel!
     @IBOutlet weak var gameStatus: UILabel!
+    @IBOutlet weak var vTeamImageView: UIImageView!
+    @IBOutlet weak var hTeamImageView: UIImageView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

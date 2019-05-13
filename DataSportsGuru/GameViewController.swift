@@ -31,6 +31,8 @@ class GameViewController: UIViewController {
     @IBOutlet weak var hTeamSeriesWin: UILabel!
     @IBOutlet weak var vTeamSeriesLoss: UILabel!
     @IBOutlet weak var hTeamSeriesLoss: UILabel!
+    @IBOutlet weak var vTeamImageView: UIImageView!
+    @IBOutlet weak var hTeamImageView: UIImageView!
     
     @IBOutlet weak var gameInfo: UILabel!
     
@@ -51,6 +53,8 @@ class GameViewController: UIViewController {
             vTeamSeriesLoss.text = game.hTeamWin
             hTeamSeriesWin.text = game.hTeamWin
             hTeamSeriesLoss.text = game.vTeamWin
+            vTeamImageView.image = UIImage(named: game.vTeamTriCode)
+            hTeamImageView.image = UIImage(named: game.hTeamTriCode)
             gameInfo.text = "Quarter: " + game.period
             gameRecapBtn.isHidden = true
         }
@@ -64,6 +68,8 @@ class GameViewController: UIViewController {
             vTeamSeriesLoss.text = game.hTeamWin
             hTeamSeriesWin.text = game.hTeamWin
             hTeamSeriesLoss.text = game.vTeamWin
+            vTeamImageView.image = UIImage(named: game.vTeamTriCode)
+            hTeamImageView.image = UIImage(named: game.hTeamTriCode)
             gameInfo.text = game.startTime
             gameRecapBtn.isHidden = true
         }
@@ -77,6 +83,8 @@ class GameViewController: UIViewController {
             vTeamSeriesLoss.text = game.hTeamWin
             hTeamSeriesWin.text = game.hTeamWin
             hTeamSeriesLoss.text = game.vTeamWin
+            vTeamImageView.image = UIImage(named: game.vTeamTriCode)
+            hTeamImageView.image = UIImage(named: game.hTeamTriCode)
             gameInfo.text = "FINAL"
          //   getGameRecap(url: "http://data.nba.net/10s/prod/v1/" + todaysDate + "/" + game.gameID + "_recap_article.json")
            getGameRecap(url: "http://data.nba.net/10s/prod/v1/" + "20190514" + "/" + game.gameID + "_recap_article.json")
@@ -102,7 +110,6 @@ class GameViewController: UIViewController {
         totalElo = hTeamElo + vTeamElo
         let hTeamPercentage = (Float(hTeamElo) / Float(totalElo)) * 100
         let vTeamPercentage = (Float(vTeamElo) / Float(totalElo)) * 100
-        print(hTeamPercentage, hTeamElo, totalElo )
         // 2. generate chart data entries
         let equipos = [game.hTeamTriCode, game.vTeamTriCode]
         let money = [hTeamPercentage, vTeamPercentage]
@@ -253,8 +260,6 @@ class GameViewController: UIViewController {
         self.hTeamElo = Int(hTeamStats.elo) + 150
         self.vTeamElo = Int(vTeamStats.elo) - 150
         
-        print(self.hTeamElo)
-        print(self.vTeamElo)
         updateChartData()
     }
     // MARK: - Navigation

@@ -106,7 +106,8 @@ class IndexGamesTableViewController: UITableViewController {
             cell.hScoreLabel.text = games[indexPath.row].hScore
             cell.hTeamLabel.text = games[indexPath.row].hTeamTriCode
             cell.gameStatus.text = "Quarter: " + games[indexPath.row].period
-            
+            cell.hTeamImageView.image = UIImage(named: games[indexPath.row].hTeamTriCode)
+            cell.vTeamImageView.image = UIImage(named: games[indexPath.row].vTeamTriCode)
         }
         else if(games[indexPath.row].status == "1") {
             cell.vScoreLabel.text = "0"
@@ -114,6 +115,8 @@ class IndexGamesTableViewController: UITableViewController {
             cell.hScoreLabel.text = "0"
             cell.hTeamLabel.text = games[indexPath.row].hTeamTriCode
             cell.gameStatus.text = games[indexPath.row].startTime
+            cell.hTeamImageView.image = UIImage(named: games[indexPath.row].hTeamTriCode)
+            cell.vTeamImageView.image = UIImage(named: games[indexPath.row].vTeamTriCode)
             
         }
         else {
@@ -121,6 +124,8 @@ class IndexGamesTableViewController: UITableViewController {
             cell.vTeamLabel.text = games[indexPath.row].vTeamTriCode
             cell.hScoreLabel.text = games[indexPath.row].hScore
             cell.hTeamLabel.text = games[indexPath.row].hTeamTriCode
+            cell.hTeamImageView.image = UIImage(named: games[indexPath.row].hTeamTriCode)
+            cell.vTeamImageView.image = UIImage(named: games[indexPath.row].vTeamTriCode)
             cell.gameStatus.text = "FINAL"
         }
         
