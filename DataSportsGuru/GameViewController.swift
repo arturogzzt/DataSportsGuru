@@ -15,11 +15,12 @@ class GameViewController: UIViewController {
     var game : Game!
     var gameRecap : JSON!
     var playoffData : JSON!
-    var vTeamElo = 0.0;
-    var HTeamElo = 0.0;
     
     var hTeamStats : TeamStats!
     var vTeamStats : TeamStats!
+    
+    var hTeamElo : Int!
+    var vTeamElo : Int!
     
     @IBOutlet weak var vScore: UILabel!
     @IBOutlet weak var hScore: UILabel!
@@ -78,8 +79,8 @@ class GameViewController: UIViewController {
             hTeamSeriesWin.text = game.hTeamWin
             hTeamSeriesLoss.text = game.vTeamWin
             gameInfo.text = "FINAL"
-//            getGameRecap(url: "http://data.nba.net/10s/prod/v1/" + todaysDate + "/" + game.gameID + "_recap_article.json")
-            getGameRecap(url: "http://data.nba.net/10s/prod/v1/" + "20190510" + "/" + game.gameID + "_recap_article.json")
+            getGameRecap(url: "http://data.nba.net/10s/prod/v1/" + todaysDate + "/" + game.gameID + "_recap_article.json")
+//            getGameRecap(url: "http://data.nba.net/10s/prod/v1/" + "20190510" + "/" + game.gameID + "_recap_article.json")
             
         }
     }
@@ -101,7 +102,7 @@ class GameViewController: UIViewController {
         
         // 2. generate chart data entries
         let equipos = [game.hTeamTriCode, game.vTeamTriCode]
-        let money = [1000.0, 1200.0]
+        let money = [self.hTeamStats.elo, self.vTeamStats.elo]
         
         var entries = [PieChartDataEntry]()
         for (index, value) in money.enumerated() {
@@ -142,10 +143,11 @@ class GameViewController: UIViewController {
     func getPlayoffStats(){
         let url = "http://data.nba.net/prod/v1/2018/team_stats_rankings.json"
         Alamofire.request(url, method: .get).responseJSON { response in
+            print(response.result.isSuccess)
             if response.result.isSuccess {
-                self.playoffData = JSON(response.result.value!)
+               self.playoffData = JSON(response.result.value!)
                self.playoffData = self.playoffData["league"]["standard"]["playoffs"]["series"]
-                self.assignPlayoffData()
+               self.assignPlayoffData()
 
             } else {
                 print("Error \(response.result.error!)")
@@ -226,11 +228,14 @@ class GameViewController: UIViewController {
         stealsVisit /= Float(visitGames)
         blocksVisit /= Float(visitGames)
         
-        hTeamStats = TeamStats.init(fgp: fgpLocal, rebounds: trpgLocal, freethrows: ftpLocal, steals: stealsLocal, blocks: blocksLocal)
-        vTeamStats = TeamStats.init(fgp: fgpVisit, rebounds: trpgVisit, freethrows: ftpVisit, steals: stealsVisit, blocks: blocksVisit)
+        self.hTeamStats = TeamStats.init(fgp: fgpLocal, rebounds: trpgLocal, freethrows: ftpLocal, steals: stealsLocal, blocks: blocksLocal)
+        self.vTeamStats = TeamStats.init(fgp: fgpVisit, rebounds: trpgVisit, freethrows: ftpVisit, steals: stealsVisit, blocks: blocksVisit)
         
-        hTeamStats.getElo()
-        vTeamStats.getElo()
+        self.hTeamStats.getElo()
+        self.vTeamStats.getElo()
+        
+        self.hTeamElo = Int(hTeamStats.elo)
+        self.vTeamElo = Int(vTeamStats.elo)
     }
     // MARK: - Navigation
 

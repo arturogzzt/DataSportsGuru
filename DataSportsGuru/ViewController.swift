@@ -17,14 +17,23 @@ class ViewController: UIViewController {
     let date = Date()
     let format = DateFormatter()
     var todaysDate : String!
+    
+    @IBOutlet weak var logoImageView: UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        logoImageView.layer.borderWidth = 1
+        logoImageView.layer.masksToBounds = false
+        logoImageView.layer.borderColor = UIColor.black.cgColor
+        logoImageView.layer.cornerRadius = logoImageView.frame.height/2
+        logoImageView.clipsToBounds = true
 
         format.dateFormat = "yyyyMMdd"
         todaysDate = format.string(from: date)
         // Do any additional setup after loading the view.
-//        getTodayGameData(url: "http://data.nba.net/10s/prod/v1/" + todaysDate + "/scoreboard.json")
-        getTodayGameData(url: "http://data.nba.net/10s/prod/v1/" + "20190510" + "/scoreboard.json")
+        getTodayGameData(url: "http://data.nba.net/10s/prod/v1/" + todaysDate + "/scoreboard.json")
+//        getTodayGameData(url: "http://data.nba.net/10s/prod/v1/" + "20190510" + "/scoreboard.json")
 
     }
 
