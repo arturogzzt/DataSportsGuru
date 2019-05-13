@@ -9,6 +9,8 @@
 import Foundation
 
 class TeamStats {
+    var ppg : Float
+    var oppg : Float
     var fgp : Float
     var rebounds : Float
     var freethrows : Float
@@ -16,14 +18,17 @@ class TeamStats {
     var blocks : Float
     var elo : Float
     
-    init(fgp : Float, rebounds : Float, freethrows : Float, steals : Float, blocks : Float) {
+    init(ppg : Float, oppg : Float,fgp : Float, rebounds : Float, freethrows : Float, steals : Float, blocks : Float) {
+        self.ppg = ppg
+        self.oppg = oppg
         self.fgp = fgp
         self.rebounds = rebounds
         self.freethrows = freethrows
         self.steals = steals
         self.blocks = blocks
         
-        
+        self.ppg = self.ppg * 3.5
+        self.oppg = self.oppg * 1.5
         self.fgp = self.fgp * 400
         self.rebounds = self.rebounds * 5
         self.freethrows = self.freethrows * 50
@@ -33,7 +38,7 @@ class TeamStats {
     }
     
     func getElo () {
-        self.elo = self.fgp + self.rebounds + self.freethrows + self.steals + self.blocks
+        self.elo = self.fgp + self.rebounds + self.freethrows + self.steals + self.blocks + self.ppg - self.oppg
     }
     
 }

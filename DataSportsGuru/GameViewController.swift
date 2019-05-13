@@ -55,7 +55,6 @@ class GameViewController: UIViewController {
             gameRecapBtn.isHidden = true
         }
         else if(game.status == "1"){
-            updateChartData()
             vScore.text = "0"
             hScore.text = "0"
             arena.text = game.arenaGame
@@ -79,8 +78,8 @@ class GameViewController: UIViewController {
             hTeamSeriesWin.text = game.hTeamWin
             hTeamSeriesLoss.text = game.vTeamWin
             gameInfo.text = "FINAL"
-            getGameRecap(url: "http://data.nba.net/10s/prod/v1/" + todaysDate + "/" + game.gameID + "_recap_article.json")
-//            getGameRecap(url: "http://data.nba.net/10s/prod/v1/" + "20190510" + "/" + game.gameID + "_recap_article.json")
+         //   getGameRecap(url: "http://data.nba.net/10s/prod/v1/" + todaysDate + "/" + game.gameID + "_recap_article.json")
+           getGameRecap(url: "http://data.nba.net/10s/prod/v1/" + "20190514" + "/" + game.gameID + "_recap_article.json")
             
         }
     }
@@ -99,10 +98,14 @@ class GameViewController: UIViewController {
     //Update Chart
 
     func updateChartData()  {
-        
+        let
+        totalElo = hTeamElo + vTeamElo
+        let hTeamPercentage = (Float(hTeamElo) / Float(totalElo)) * 100
+        let vTeamPercentage = (Float(vTeamElo) / Float(totalElo)) * 100
+        print(hTeamPercentage, hTeamElo, totalElo )
         // 2. generate chart data entries
         let equipos = [game.hTeamTriCode, game.vTeamTriCode]
-        let money = [self.hTeamStats.elo, self.vTeamStats.elo]
+        let money = [hTeamPercentage, vTeamPercentage]
         
         var entries = [PieChartDataEntry]()
         for (index, value) in money.enumerated() {
@@ -156,11 +159,16 @@ class GameViewController: UIViewController {
     }
     
     func assignPlayoffData(){
+        var ppgLocal : Float = 0
+        var oppgLocal : Float = 0
         var fgpLocal : Float = 0
         var trpgLocal : Float = 0
         var ftpLocal : Float = 0
         var stealsLocal : Float = 0
         var blocksLocal : Float = 0
+        
+        var ppgVisit : Float = 0
+        var oppgVisit : Float = 0
         var fgpVisit : Float = 0
         var trpgVisit : Float = 0
         var ftpVisit : Float = 0
@@ -170,7 +178,8 @@ class GameViewController: UIViewController {
         var localGames : Int = 0
         var visitGames : Int = 0
         
-        for i in 0...playoffData.count{
+        for i in 0...playoffData.count - 4{
+            print(playoffData.count)
             if(playoffData[i]["teams"][0]["teamId"].stringValue == game.vTeamID){
                 let data = playoffData[i]["teams"][0]
                 
@@ -179,18 +188,22 @@ class GameViewController: UIViewController {
                 ftpVisit += Float(data["ftp"]["avg"].stringValue)!
                 stealsVisit += Float(data["spg"]["avg"].stringValue)!
                 blocksVisit += Float(data["bpg"]["avg"].stringValue)!
+                ppgVisit += Float(data["ppg"]["avg"].stringValue)!
+                oppgVisit += Float(data["oppg"]["avg"].stringValue)!
                 
                 visitGames += 1
                 
             }
-            if(playoffData[i]["teams"][1]["teamId"].stringValue == game.vTeamID){
-                let data = playoffData[i]["teams"][0]
-                
+            else if(playoffData[i]["teams"][1]["teamId"].stringValue == game.vTeamID){
+                let data = playoffData[i]["teams"][1]
+                print(i)
                 fgpVisit += Float(data["fgp"]["avg"].stringValue)!
                 trpgVisit += Float(data["trpg"]["avg"].stringValue)!
                 ftpVisit += Float(data["ftp"]["avg"].stringValue)!
                 stealsVisit += Float(data["spg"]["avg"].stringValue)!
                 blocksVisit += Float(data["bpg"]["avg"].stringValue)!
+                ppgVisit += Float(data["ppg"]["avg"].stringValue)!
+                oppgVisit += Float(data["oppg"]["avg"].stringValue)!
                 
                 visitGames += 1
             }
@@ -202,40 +215,47 @@ class GameViewController: UIViewController {
                 ftpLocal += Float(data["ftp"]["avg"].stringValue)!
                 stealsLocal += Float(data["spg"]["avg"].stringValue)!
                 blocksLocal += Float(data["bpg"]["avg"].stringValue)!
+                ppgLocal += Float(data["ppg"]["avg"].stringValue)!
+                oppgLocal += Float(data["oppg"]["avg"].stringValue)!
                 
                 localGames += 1
             }
-            if(playoffData[i]["teams"][1]["teamId"].stringValue == game.hTeamID){
-                let data = playoffData[i]["teams"][0]
+            else if(playoffData[i]["teams"][1]["teamId"].stringValue == game.hTeamID){
+                let data = playoffData[i]["teams"][1]
                 
                 fgpLocal += Float(data["fgp"]["avg"].stringValue)!
                 trpgLocal += Float(data["trpg"]["avg"].stringValue)!
                 ftpLocal += Float(data["ftp"]["avg"].stringValue)!
                 stealsLocal += Float(data["spg"]["avg"].stringValue)!
                 blocksLocal += Float(data["bpg"]["avg"].stringValue)!
-                
+                ppgLocal += Float(data["ppg"]["avg"].stringValue)!
+                oppgLocal += Float(data["oppg"]["avg"].stringValue)!
                 localGames += 1
             }
         }
-        fgpLocal /= Float(localGames)
-        trpgLocal /= Float(localGames)
-        ftpLocal /= Float(localGames)
-        stealsLocal /= Float(localGames)
-        blocksLocal /= Float(localGames)
-        fgpVisit /= Float(visitGames)
-        trpgVisit /= Float(visitGames)
-        ftpVisit /= Float(visitGames)
-        stealsVisit /= Float(visitGames)
-        blocksVisit /= Float(visitGames)
+//        fgpLocal /= Float(localGames)
+//        trpgLocal /= Float(localGames)
+//        ftpLocal /= Float(localGames)
+//        stealsLocal /= Float(localGames)
+//        blocksLocal /= Float(localGames)
+//        fgpVisit /= Float(visitGames)
+//        trpgVisit /= Float(visitGames)
+//        ftpVisit /= Float(visitGames)
+//        stealsVisit /= Float(visitGames)
+//        blocksVisit /= Float(visitGames)
         
-        self.hTeamStats = TeamStats.init(fgp: fgpLocal, rebounds: trpgLocal, freethrows: ftpLocal, steals: stealsLocal, blocks: blocksLocal)
-        self.vTeamStats = TeamStats.init(fgp: fgpVisit, rebounds: trpgVisit, freethrows: ftpVisit, steals: stealsVisit, blocks: blocksVisit)
+        self.hTeamStats = TeamStats.init(ppg: ppgLocal, oppg: oppgLocal, fgp: fgpLocal, rebounds: trpgLocal, freethrows: ftpLocal, steals: stealsLocal, blocks: blocksLocal)
+        self.vTeamStats = TeamStats.init(ppg: ppgVisit, oppg: oppgVisit, fgp: fgpVisit, rebounds: trpgVisit, freethrows: ftpVisit, steals: stealsVisit, blocks: blocksVisit)
         
         self.hTeamStats.getElo()
         self.vTeamStats.getElo()
         
-        self.hTeamElo = Int(hTeamStats.elo)
-        self.vTeamElo = Int(vTeamStats.elo)
+        self.hTeamElo = Int(hTeamStats.elo) + 150
+        self.vTeamElo = Int(vTeamStats.elo) - 150
+        
+        print(self.hTeamElo)
+        print(self.vTeamElo)
+        updateChartData()
     }
     // MARK: - Navigation
 
