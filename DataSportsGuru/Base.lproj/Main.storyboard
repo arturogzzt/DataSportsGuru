@@ -292,7 +292,7 @@
                                 <color key="textColor" red="0.91678696869999998" green="0.52073854210000003" blue="0.2037707269" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eoq-dy-a1J" customClass="FlatButton" customModule="SwiftyButton">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eoq-dy-a1J" customClass="FlatButton" customModule="SwiftyButton">
                                 <rect key="frame" x="20" y="763" width="163" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Vote Away">
@@ -307,7 +307,7 @@
                                     <action selector="voteAway:" destination="4qZ-2W-8Sx" eventType="touchUpInside" id="yy5-TK-MAg"/>
                                 </connections>
                             </button>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="One-ai-QkM" customClass="FlatButton" customModule="SwiftyButton">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="One-ai-QkM" customClass="FlatButton" customModule="SwiftyButton">
                                 <rect key="frame" x="233" y="763" width="163" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Vote Home">
@@ -322,7 +322,7 @@
                                     <action selector="voteHome:" destination="4qZ-2W-8Sx" eventType="touchUpInside" id="PmB-V7-tcy"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="s8l-Zm-5Pp" customClass="PieChartView" customModule="Charts">
+                            <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="s8l-Zm-5Pp" customClass="PieChartView" customModule="Charts">
                                 <rect key="frame" x="111" y="666" width="192" height="174"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

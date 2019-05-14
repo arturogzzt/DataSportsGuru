@@ -13,5 +13,4 @@ target 'DataSportsGuru' do
   pod 'Charts'
   pod 'SkyFloatingLabelTextField', '~> 3.0'
   pod 'SwiftyButton'
-  pod 'Firebase/Firestore'
 end

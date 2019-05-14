@@ -30,6 +30,10 @@ class GameViewController: UIViewController {
     var currentHomeVotes : Int!
     var currentVisitVotes : Int!
     
+    var usersVoted = [String]()
+    
+    var userVote : Bool = false
+    
     
     @IBOutlet weak var vScore: UILabel!
     @IBOutlet weak var hScore: UILabel!
@@ -58,6 +62,8 @@ class GameViewController: UIViewController {
         
         getPlayoffStats()
         getCurrentVotes()
+        getUserCount()
+        
         
         if(game.status == "2"){
             vScore.text = game.vScore
@@ -75,7 +81,6 @@ class GameViewController: UIViewController {
             gameRecapBtn.isHidden = true
         }
         else if(game.status == "1"){
-            print("GAME ID: \(game.gameID)")
             vScore.text = "0"
             hScore.text = "0"
             arena.text = game.arenaGame
@@ -89,6 +94,11 @@ class GameViewController: UIViewController {
             hTeamImageView.image = UIImage(named: game.hTeamTriCode)
             gameInfo.text = game.startTime
             gameRecapBtn.isHidden = true
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
+                self.userVote = self.userVoted()
+            })
+            
         }
         else {
             vScore.text = game.vScore
@@ -165,6 +175,16 @@ class GameViewController: UIViewController {
         self.view.addSubview(pieChartView)
         
     }
+    override func viewDidAppear(_ animated: Bool) {
+        if Auth.auth().currentUser != nil {
+            if userVote {
+                voteHomeButton.isHidden = true
+                voteAwayButton.isHidden = true
+                votePieChart.isHidden = false
+                updateVoteChartData()
+            }
+        }
+    }
     
     func updateVoteChartData()  {
         let hTeamVotePercentage = Float(currentHomeVotes) / (Float(currentHomeVotes) + Float(currentVisitVotes)) * 100
@@ -211,7 +231,6 @@ class GameViewController: UIViewController {
     func getPlayoffStats(){
         let url = "http://data.nba.net/prod/v1/2018/team_stats_rankings.json"
         Alamofire.request(url, method: .get).responseJSON { response in
-            print(response.result.isSuccess)
             if response.result.isSuccess {
                self.playoffData = JSON(response.result.value!)
                self.playoffData = self.playoffData["league"]["standard"]["playoffs"]["series"]
@@ -244,7 +263,6 @@ class GameViewController: UIViewController {
         var visitGames : Int = 0
         
         for i in 0...playoffData.count - 4{
-            print(playoffData.count)
             if(playoffData[i]["teams"][0]["teamId"].stringValue == game.vTeamID){
                 let data = playoffData[i]["teams"][0]
                 
@@ -261,7 +279,6 @@ class GameViewController: UIViewController {
             }
             else if(playoffData[i]["teams"][1]["teamId"].stringValue == game.vTeamID){
                 let data = playoffData[i]["teams"][1]
-                print(i)
                 fgpVisit += Float(data["fgp"]["avg"].stringValue)!
                 trpgVisit += Float(data["trpg"]["avg"].stringValue)!
                 ftpVisit += Float(data["ftp"]["avg"].stringValue)!
@@ -325,9 +342,13 @@ class GameViewController: UIViewController {
     }
     
     @IBAction func voteAway(_ sender: Any) {
+        let userID = Auth.auth().currentUser!.uid
+        usersVoted.append(userID)
+        
+        
         currentVisitVotes += 1
         
-        self.ref.child("games").child(game.gameID).setValue(["awayVotes": currentVisitVotes, "homeVotes" : currentHomeVotes])
+        self.ref.child("games").child(game.gameID).setValue(["awayVotes": currentVisitVotes!, "homeVotes" : currentHomeVotes!, "users" : usersVoted] )
         
         voteAwayButton.isHidden = true
         voteHomeButton.isHidden = true
@@ -338,9 +359,13 @@ class GameViewController: UIViewController {
     
     
     @IBAction func voteHome(_ sender: Any) {
+        let userID = Auth.auth().currentUser!.uid
+        print(userID)
+        usersVoted.append(userID)
+        
         currentHomeVotes += 1
         
-        self.ref.child("games").child(game.gameID).setValue(["awayVotes": currentVisitVotes, "homeVotes": currentHomeVotes])
+        self.ref.child("games").child(game.gameID).setValue(["awayVotes": currentVisitVotes!, "homeVotes": currentHomeVotes!, "users" : usersVoted])
         
         voteAwayButton.isHidden = true
         voteHomeButton.isHidden = true
@@ -357,6 +382,28 @@ class GameViewController: UIViewController {
             let homeVotes = value?["homeVotes"] as? Int ?? 0
             self.currentVisitVotes = visitVotes
             self.currentHomeVotes = homeVotes
+        }) { (error) in
+            print(error.localizedDescription)
+        }
+    }
+    
+    func userVoted() -> Bool {
+        for user in usersVoted {
+            if Auth.auth().currentUser?.uid == user {
+                return true
+            }
+        }
+        print("USERSVOTED: \(usersVoted)")
+        return false
+    }
+    
+    func getUserCount() {
+        var users : NSArray!
+        ref.child("games").child(game.gameID).observeSingleEvent(of: .value, with: { (snapshot) in
+            let value = snapshot.value as? NSDictionary
+            users = value?["users"] as? NSArray ?? []
+            self.usersVoted = users as! [String]
+            print(self.usersVoted)
         }) { (error) in
             print(error.localizedDescription)
         }
