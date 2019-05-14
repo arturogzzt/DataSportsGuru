@@ -10,6 +10,8 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 import Charts
+import SwiftyButton
+import Firebase
 
 class GameViewController: UIViewController {
     var game : Game!
@@ -22,6 +24,12 @@ class GameViewController: UIViewController {
     var hTeamElo : Int!
     var vTeamElo : Int!
     
+    
+    
+    var currentHomeVotes : Int!
+    var currentVisitVotes : Int!
+    
+    
     @IBOutlet weak var vScore: UILabel!
     @IBOutlet weak var hScore: UILabel!
     @IBOutlet weak var vTeamTri: UILabel!
@@ -33,6 +41,9 @@ class GameViewController: UIViewController {
     @IBOutlet weak var hTeamSeriesLoss: UILabel!
     @IBOutlet weak var vTeamImageView: UIImageView!
     @IBOutlet weak var hTeamImageView: UIImageView!
+    @IBOutlet weak var voteAwayButton: FlatButton!
+    @IBOutlet weak var voteHomeButton: FlatButton!
+    
     
     @IBOutlet weak var gameInfo: UILabel!
     
@@ -41,7 +52,9 @@ class GameViewController: UIViewController {
     @IBOutlet weak var pieChartView: PieChartView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         getPlayoffStats()
+        getCurrentVotes()
         
         if(game.status == "2"){
             vScore.text = game.vScore
@@ -59,6 +72,7 @@ class GameViewController: UIViewController {
             gameRecapBtn.isHidden = true
         }
         else if(game.status == "1"){
+            print("GAME ID: \(game.gameID)")
             vScore.text = "0"
             hScore.text = "0"
             arena.text = game.arenaGame
@@ -275,6 +289,27 @@ class GameViewController: UIViewController {
             
         }
     }
-
+    
+    @IBAction func voteAway(_ sender: Any) {
+        currentHomeVotes += 1
+        
+        db.collection("games").document(game.gameID).setData(["votesHome" : currentHomeVotes])
+    }
+    
+    
+    @IBAction func voteHome(_ sender: Any) {
+        currentVisitVotes += 1
+        
+        db.collection("games").document(game.gameID).setData(["votesAway" : currentVisitVotes])
+    }
+    
+    func getCurrentVotes() {
+        
+        
+        
+//        currentHomeVotes = db.collection("games").document(game.gameID).value(forKey: "votesHome") as? Int
+//        currentVisitVotes = db.collection("games").document(game.gameID).value(forKey: "votesAway") as? Int
+    }
+    
 
 }
