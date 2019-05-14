@@ -9,6 +9,7 @@ target 'DataSportsGuru' do
   pod 'SwiftyJSON'
   pod 'Firebase/Core'
   pod 'Firebase/Auth', '~> 5.0'
+  pod 'Firebase/Database'
   pod 'Charts'
   pod 'SkyFloatingLabelTextField', '~> 3.0'
   pod 'SwiftyButton'

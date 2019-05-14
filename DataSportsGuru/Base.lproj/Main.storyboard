@@ -266,7 +266,7 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JPD-IA-QBU" customClass="PieChartView" customModule="Charts">
-                                <rect key="frame" x="78" y="470" width="257" height="208"/>
+                                <rect key="frame" x="111" y="451" width="192" height="174"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
@@ -292,7 +292,7 @@
                                 <color key="textColor" red="0.91678696869999998" green="0.52073854210000003" blue="0.2037707269" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eoq-dy-a1J" customClass="FlatButton" customModule="SwiftyButton">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eoq-dy-a1J" customClass="FlatButton" customModule="SwiftyButton">
                                 <rect key="frame" x="20" y="763" width="163" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Vote Away">
@@ -307,7 +307,7 @@
                                     <action selector="voteAway:" destination="4qZ-2W-8Sx" eventType="touchUpInside" id="yy5-TK-MAg"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="One-ai-QkM" customClass="FlatButton" customModule="SwiftyButton">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="One-ai-QkM" customClass="FlatButton" customModule="SwiftyButton">
                                 <rect key="frame" x="233" y="763" width="163" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Vote Home">
@@ -322,6 +322,11 @@
                                     <action selector="voteHome:" destination="4qZ-2W-8Sx" eventType="touchUpInside" id="PmB-V7-tcy"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="s8l-Zm-5Pp" customClass="PieChartView" customModule="Charts">
+                                <rect key="frame" x="111" y="666" width="192" height="174"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.37055522200000002" green="0.37056469920000001" blue="0.37055957319999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="gI1-Mb-lZy"/>
@@ -343,6 +348,7 @@
                         <outlet property="vTeamTri" destination="UL1-xE-mg8" id="NJn-ix-Bg3"/>
                         <outlet property="voteAwayButton" destination="eoq-dy-a1J" id="RkQ-hN-t9B"/>
                         <outlet property="voteHomeButton" destination="One-ai-QkM" id="45i-jR-xCg"/>
+                        <outlet property="votePieChart" destination="s8l-Zm-5Pp" id="DDs-yH-hw5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tEf-pM-fyy" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -12,6 +12,7 @@ import SwiftyJSON
 import Charts
 import SwiftyButton
 import Firebase
+import FirebaseDatabase
 
 class GameViewController: UIViewController {
     var game : Game!
@@ -24,7 +25,7 @@ class GameViewController: UIViewController {
     var hTeamElo : Int!
     var vTeamElo : Int!
     
-    
+    var ref: DatabaseReference!
     
     var currentHomeVotes : Int!
     var currentVisitVotes : Int!
@@ -43,6 +44,7 @@ class GameViewController: UIViewController {
     @IBOutlet weak var hTeamImageView: UIImageView!
     @IBOutlet weak var voteAwayButton: FlatButton!
     @IBOutlet weak var voteHomeButton: FlatButton!
+    @IBOutlet weak var votePieChart: PieChartView!
     
     
     @IBOutlet weak var gameInfo: UILabel!
@@ -52,6 +54,7 @@ class GameViewController: UIViewController {
     @IBOutlet weak var pieChartView: PieChartView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        ref = Database.database().reference()
         
         getPlayoffStats()
         getCurrentVotes()
@@ -126,10 +129,10 @@ class GameViewController: UIViewController {
         let vTeamPercentage = (Float(vTeamElo) / Float(totalElo)) * 100
         // 2. generate chart data entries
         let equipos = [game.hTeamTriCode, game.vTeamTriCode]
-        let money = [hTeamPercentage, vTeamPercentage]
+        let percentages = [hTeamPercentage, vTeamPercentage]
         
         var entries = [PieChartDataEntry]()
-        for (index, value) in money.enumerated() {
+        for (index, value) in percentages.enumerated() {
             let entry = PieChartDataEntry()
             entry.y = Double(value)
             entry.label = equipos[index]
@@ -141,7 +144,7 @@ class GameViewController: UIViewController {
         // this is custom extension method. Download the code for more details.
         var colors: [UIColor] = []
         
-        for _ in 0..<money.count {
+        for _ in 0..<percentages.count {
             let red = Double(arc4random_uniform(256))
             let green = Double(arc4random_uniform(256))
             let blue = Double(arc4random_uniform(256))
@@ -160,6 +163,47 @@ class GameViewController: UIViewController {
         pieChartView.holeRadiusPercent = 0
         pieChartView.transparentCircleColor = UIColor.clear
         self.view.addSubview(pieChartView)
+        
+    }
+    
+    func updateVoteChartData()  {
+        let hTeamVotePercentage = Float(currentHomeVotes) / (Float(currentHomeVotes) + Float(currentVisitVotes)) * 100
+        let vTeamVotePercentage = Float(currentVisitVotes) / (Float(currentHomeVotes) + Float(currentVisitVotes)) * 100
+        let equipos = [game.hTeamTriCode, game.vTeamTriCode]
+        let percentages = [hTeamVotePercentage, vTeamVotePercentage]
+        
+        var entries = [PieChartDataEntry]()
+        for (index, value) in percentages.enumerated() {
+            let entry = PieChartDataEntry()
+            entry.y = Double(value)
+            entry.label = equipos[index]
+            entries.append( entry)
+        }
+        
+        // 3. chart setup
+        let set = PieChartDataSet( entries: entries, label: "Game Odds via DataSportsGuru Algorithm")
+        // this is custom extension method. Download the code for more details.
+        var colors: [UIColor] = []
+        
+        for _ in 0..<percentages.count {
+            let red = Double(arc4random_uniform(256))
+            let green = Double(arc4random_uniform(256))
+            let blue = Double(arc4random_uniform(256))
+            let color = UIColor(red: CGFloat(red/255), green: CGFloat(green/255), blue: CGFloat(blue/255), alpha: 1)
+            colors.append(color)
+        }
+        set.colors = colors
+        let data = PieChartData(dataSet: set)
+        votePieChart.data = data
+        votePieChart.noDataText = "No data available"
+        // user interaction
+        votePieChart.isUserInteractionEnabled = true
+        
+        let d = Description()
+        votePieChart.chartDescription = d
+        votePieChart.holeRadiusPercent = 0
+        votePieChart.transparentCircleColor = UIColor.clear
+        self.view.addSubview(votePieChart)
         
     }
     //PLAYOFFSTAT FUNCTION
@@ -254,16 +298,6 @@ class GameViewController: UIViewController {
                 localGames += 1
             }
         }
-//        fgpLocal /= Float(localGames)
-//        trpgLocal /= Float(localGames)
-//        ftpLocal /= Float(localGames)
-//        stealsLocal /= Float(localGames)
-//        blocksLocal /= Float(localGames)
-//        fgpVisit /= Float(visitGames)
-//        trpgVisit /= Float(visitGames)
-//        ftpVisit /= Float(visitGames)
-//        stealsVisit /= Float(visitGames)
-//        blocksVisit /= Float(visitGames)
         
         self.hTeamStats = TeamStats.init(ppg: ppgLocal, oppg: oppgLocal, fgp: fgpLocal, rebounds: trpgLocal, freethrows: ftpLocal, steals: stealsLocal, blocks: blocksLocal)
         self.vTeamStats = TeamStats.init(ppg: ppgVisit, oppg: oppgVisit, fgp: fgpVisit, rebounds: trpgVisit, freethrows: ftpVisit, steals: stealsVisit, blocks: blocksVisit)
@@ -291,25 +325,41 @@ class GameViewController: UIViewController {
     }
     
     @IBAction func voteAway(_ sender: Any) {
-        currentHomeVotes += 1
+        currentVisitVotes += 1
         
-        db.collection("games").document(game.gameID).setData(["votesHome" : currentHomeVotes])
+        self.ref.child("games").child(game.gameID).setValue(["awayVotes": currentVisitVotes, "homeVotes" : currentHomeVotes])
+        
+        voteAwayButton.isHidden = true
+        voteHomeButton.isHidden = true
+        
+        updateVoteChartData()
+        votePieChart.isHidden = false
     }
     
     
     @IBAction func voteHome(_ sender: Any) {
-        currentVisitVotes += 1
+        currentHomeVotes += 1
         
-        db.collection("games").document(game.gameID).setData(["votesAway" : currentVisitVotes])
+        self.ref.child("games").child(game.gameID).setValue(["awayVotes": currentVisitVotes, "homeVotes": currentHomeVotes])
+        
+        voteAwayButton.isHidden = true
+        voteHomeButton.isHidden = true
+        
+        updateVoteChartData()
+        votePieChart.isHidden = false
     }
     
     func getCurrentVotes() {
         
-        
-        
-//        currentHomeVotes = db.collection("games").document(game.gameID).value(forKey: "votesHome") as? Int
-//        currentVisitVotes = db.collection("games").document(game.gameID).value(forKey: "votesAway") as? Int
+        ref.child("games").child(game.gameID).observeSingleEvent(of: .value, with: { (snapshot) in
+            let value = snapshot.value as? NSDictionary
+            let visitVotes = value?["awayVotes"] as? Int ?? 0
+            let homeVotes = value?["homeVotes"] as? Int ?? 0
+            self.currentVisitVotes = visitVotes
+            self.currentHomeVotes = homeVotes
+        }) { (error) in
+            print(error.localizedDescription)
+        }
     }
-    
 
 }
