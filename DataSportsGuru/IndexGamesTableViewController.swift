@@ -18,8 +18,8 @@ class IndexGamesTableViewController: UITableViewController {
     var todaysDate : String!
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let user = Auth.auth().currentUser {
-         //logoutButton.isEnabled = false
+        if (Auth.auth().currentUser == nil) {
+         logoutButton.isEnabled = false
         }
         
         

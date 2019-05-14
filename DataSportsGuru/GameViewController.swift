@@ -143,7 +143,7 @@ class GameViewController: UIViewController {
         
         let d = Description()
         pieChartView.chartDescription = d
-        pieChartView.holeRadiusPercent = 0.5
+        pieChartView.holeRadiusPercent = 0
         pieChartView.transparentCircleColor = UIColor.clear
         self.view.addSubview(pieChartView)
         
