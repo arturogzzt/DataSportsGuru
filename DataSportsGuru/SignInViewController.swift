@@ -57,7 +57,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
                 changeRequest?.displayName = username
                 changeRequest?.commitChanges{ error in
                     if error == nil {
-                        print("User display name changed")
+                      print("User display name changed")
                       self.navigationController?.popViewController(animated: true)
                     }
                 }
@@ -65,6 +65,15 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
 
             } else {
                 print("Error: \(error!.localizedDescription)")
+                self.emailTF.text = ""
+                self.pwTF.text = ""
+                self.usernameTF.text = ""
+                
+                let alert = UIAlertController(title: error!.localizedDescription, message: "Please try again.", preferredStyle: .alert)
+                
+                alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                
+                self.present(alert, animated: true)
             }
         }
     }

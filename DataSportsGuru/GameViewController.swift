@@ -210,7 +210,7 @@ class GameViewController: UIViewController {
         }
         
         // 3. chart setup
-        let set = PieChartDataSet( entries: entries, label: "Game Odds via DataSportsGuru Algorithm")
+        let set = PieChartDataSet( entries: entries, label: "Game Picks via DataSportsGuru Gurus")
         // this is custom extension method. Download the code for more details.
         var colors: [UIColor] = []
         

@@ -55,6 +55,15 @@ class LoginViewController: UIViewController {
             if error == nil && user != nil {
                 self.navigationController?.popViewController(animated: true)
             } else {
+                self.emailTF.text = ""
+                self.pwTF.text = ""
+                let alert = UIAlertController(title: "Username or password incorrect", message: "Please try again.", preferredStyle: .alert)
+                
+                alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                
+                self.present(alert, animated: true)
+                
+                
                 print("Error logging in: \(error!.localizedDescription)")
             }
         }

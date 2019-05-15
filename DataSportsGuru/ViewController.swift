@@ -40,8 +40,10 @@ class ViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        if let user = Auth.auth().currentUser {
-            self.performSegue(withIdentifier: "muestra", sender: self)
+        if Auth.auth().currentUser != nil {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: {
+                self.performSegue(withIdentifier: "muestra", sender: self)
+            })
        }
     }
     
