@@ -131,8 +131,7 @@ class GameViewController: UIViewController {
             vTeamImageView.image = UIImage(named: game.vTeamTriCode)
             hTeamImageView.image = UIImage(named: game.hTeamTriCode)
             gameInfo.text = "FINAL"
-         //   getGameRecap(url: "http://data.nba.net/10s/prod/v1/" + todaysDate + "/" + game.gameID + "_recap_article.json")
-           getGameRecap(url: "http://data.nba.net/10s/prod/v1/" + "20190514" + "/" + game.gameID + "_recap_article.json")
+            getGameRecap(url: "http://data.nba.net/10s/prod/v1/" + todaysDate + "/" + game.gameID + "_recap_article.json")
             
         }
     }

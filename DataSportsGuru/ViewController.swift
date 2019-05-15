@@ -32,9 +32,7 @@ class ViewController: UIViewController {
         format.dateFormat = "yyyyMMdd"
         todaysDate = format.string(from: date)
         // Do any additional setup after loading the view.
-     //   getTodayGameData(url: "http://data.nba.net/10s/prod/v1/" + todaysDate + "/scoreboard.json")
-        getTodayGameData(url: "http://data.nba.net/10s/prod/v1/" + "20190514" + "/scoreboard.json")
-
+        getTodayGameData(url: "http://data.nba.net/10s/prod/v1/" + todaysDate + "/scoreboard.json")
     }
 
     
