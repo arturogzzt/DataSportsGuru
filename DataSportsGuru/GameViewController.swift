@@ -99,6 +99,24 @@ class GameViewController: UIViewController {
                 self.userVote = self.userVoted()
             })
             
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.6, execute: {
+                if Auth.auth().currentUser != nil {
+                    if self.userVote {
+                        self.voteHomeButton.isHidden = true
+                        self.voteAwayButton.isHidden = true
+                        self.votePieChart.isHidden = false
+                        self.updateVoteChartData()
+                    } else {
+                        self.votePieChart.isHidden = true
+                        self.voteHomeButton.isHidden = false
+                        self.voteAwayButton.isHidden = false
+                    }
+                } else {
+                    self.updateVoteChartData()
+                    self.pieChartView.isHidden = false
+                }
+                
+            })
         }
         else {
             vScore.text = game.vScore
@@ -175,16 +193,7 @@ class GameViewController: UIViewController {
         self.view.addSubview(pieChartView)
         
     }
-    override func viewDidAppear(_ animated: Bool) {
-        if Auth.auth().currentUser != nil {
-            if userVote {
-                voteHomeButton.isHidden = true
-                voteAwayButton.isHidden = true
-                votePieChart.isHidden = false
-                updateVoteChartData()
-            }
-        }
-    }
+
     
     func updateVoteChartData()  {
         let hTeamVotePercentage = Float(currentHomeVotes) / (Float(currentHomeVotes) + Float(currentVisitVotes)) * 100
